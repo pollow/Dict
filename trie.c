@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-const char HEX[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-
 struct trieNode {
     int index;
     char *word;
@@ -14,7 +12,6 @@ void trieNodeInit(struct trieNode *a) {
     a->index = -1;
     a->word = NULL;
     memset(a->son,0,sizeof(a->son));
-    int b = sizeof(a->son);
 }
 
 struct trieNode *newNode() {
@@ -51,33 +48,36 @@ void hexConvert(int *a, char *b) {
     a[strlen(b)*2]=-1;
 }
 
-void init() {
+int init() {
     freopen("index.txt","r",stdin);
     int hexStr[100],index;
     char str[100];
+	int a;
     while(scanf("%d ",&index)==1) {
-        if(index == 383) {
-            index = 383;
+        if(index%91285 == 0) {
+            a = 0;
         }
         printf("%d\n",index);
         int i = 0; while((str[i++]=getchar()) != '\n'); str[i-1] = '\0';
         hexConvert(hexStr,str);
         trieInsert(&root,index,hexStr,str);
     }
-    int a = fclose(stdin);
+    //int a=fclose(stdin);
+	for(int i = 0;i < 10;i++) printf("%d\n",i);
+	return 1;
 }
 
 int main() {
-    int a = sizeof(trieNode);
     init();
-    while(1) {
-        int hexStr[100];
-        char str[100];
-        scanf("%s",str);
-        hexConvert(hexStr,str);
-        struct trieNode *a = trieSearch(&root,hexStr);
-        printf("%d %s",a->index,a->word);
-    }
+    // while(1) {
+	for(int i = 0;i < 10;i++) printf("%d\n",i);
+    //     int hexStr[100];
+    //     char str[100];
+    //     scanf("%s",str);
+    //     hexConvert(hexStr,str);
+    //     struct trieNode *a = trieSearch(&root,hexStr);
+    //     printf("%d %s",a->index,a->word);
+    // }
     return 0;
 }
-        
+
