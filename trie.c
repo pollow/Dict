@@ -21,6 +21,7 @@ int _index;
 void trieNodeInit(struct trieNode *a) {
     a->index = -1;
     a->word = NULL;
+    int t = sizeof(a->son);
     memset(a->son,0,sizeof(a->son));
 }
 
@@ -28,6 +29,14 @@ struct trieNode *newNode() {
     struct trieNode *tmp = (struct trieNode *)malloc(sizeof(struct trieNode));
     trieNodeInit(tmp);
     return tmp;
+}
+
+void hexConvert(int *a, char *b) {
+    for(int i=0;i<strlen(b);i++) {
+        a[i*2] = b[i]/16;
+        a[i*2+1] = b[i]%16;
+    }
+    a[strlen(b)*2]=-1;
 }
 
 struct trieNode *trieInsert(struct trieNode *u, int *q, const char *word) {
@@ -42,7 +51,9 @@ struct trieNode *trieInsert(struct trieNode *u, int *q, const char *word) {
     return u;
 }
 
-struct trieNode *trieSearch(struct trieNode *u, int *p) {
+struct trieNode *trieSearch(struct trieNode *u, char *str) {
+    int hexStr[200],*p=hexStr;
+    hexConvert(hexStr,str);
     while (*p != -1) {
         u = u->son[*p];
 		p++;
@@ -53,21 +64,13 @@ struct trieNode *trieSearch(struct trieNode *u, int *p) {
     return u;
 }
 
-void hexConvert(int *a, char *b) {
-    for(int i=0;i<strlen(b);i++) {
-        a[i*2] = b[i]/16;
-        a[i*2+1] = b[i]%16;
-    }
-    a[strlen(b)*2]=-1;
-}
-
 int init() {
-    FILE *f = fopen("/Users/Deus/workspace/Dict/index.txt", "r");
+    FILE *f = fopen("index.txt", "r");
     int hexStr[100];
+    int a;
     char str[100];
-	int a;
     while(fscanf(f,"%d ",&_index)==1) {
-        if(_index%2027 == 0) {
+        if(_index == 382){
             a = 0;
         }
         printf("%d\n",_index);
@@ -82,14 +85,11 @@ int init() {
 int main() {
     init();
     while(1) {
-        int hexStr[100];
         char str[100];
         scanf("%s",str);
-        hexConvert(hexStr,str);
-        struct trieNode *a = trieSearch(&root,hexStr);
+        struct trieNode *a = trieSearch(&root,str);
         printf("%d %s",a->index,a->word);
     }
     return 0;
 }
-
 
