@@ -1,15 +1,4 @@
-#include <ncurses.h>
-#include <panel.h>
-#include <locale.h>
-#include <string.h>
-#include <ctype.h>
-
-int max_col, max_row;
-char waitingWord[1000];
-
-PANEL *homePanel, *viewPanel;
-WINDOW *inputBoxBorder, *wordsListBorder, *wordDetailBorder,*inputBox,*wordsList,*wordDetail;
-    
+#include "layout.h"
 
 void layoutInit() {
     // 设置语言环境
@@ -42,18 +31,29 @@ void layoutInit() {
     wrefresh(wordDetail);
     // init finish
     refresh();
+    wmove(inputBox,0,0); // 设置初始光标位置
+    wrefresh(inputBox);
     // all init finish
     
     // color set
     init_pair(1,COLOR_BLACK,COLOR_WHITE);   // 高亮选中
-    init_pair(2,COLOR_BLACK,COLOR_BLACK);   // 正常色
+    init_pair(2,COLOR_WHITE,COLOR_BLACK);   // 正常色
     wattron(wordsList,COLOR_PAIR(2));       // wordsList窗体颜色
     wattron(inputBox,COLOR_PAIR(2));        // inputBox窗体颜色
     wattron(wordDetail,COLOR_PAIR(2));      // wordDetail窗体颜色
+
 }
 
 void wordSelect() {
-    int item = 0;
+    int item = 0,i=0;;
+    int indexs[20];
+    memset(indexs,0,sizeof(indexs));
+    struct trieList *p = trielist;
+    while(p) {
+        index[i] = p->key->index;
+        p = p->next;
+        i++;
+    }
     curs_set(0);
     mvwchgat(wordsList,0,0,-1,A_NORMAL,1,NULL);
     wrefresh(wordsList);
@@ -79,11 +79,12 @@ void wordSelect() {
         }
         mvwchgat(wordsList,item,0,-1,A_NORMAL,1,NULL);
         wrefresh(wordsList);
+        // 向detail打印解释。
     }
     curs_set(1);
 }
 
-int main() {
+int layoutProcess() {
     layoutInit();
 
     int ch,p=0,len=0;
@@ -127,8 +128,16 @@ int main() {
                 }
         }
         mvwprintw(inputBox,0,0,waitingWord);
-        for(int i=0;i<=max_row-4;i++) {
-            mvwprintw(wordsList,i,0,waitingWord);
+        // for(int i=0;i<=max_row-4;i++) {
+        //     mvwprintw(wordsList,i,0,waitingWord);
+        // }
+        lookupProcess(waitingWord);
+        i = 0;
+        struct trieList *p = trielist;
+        while(p) {
+            mvprintw(wordsList,p,0,trielist->key->word);
+            p = p->next;
+            i++;
         }
         wrefresh(wordsList);
         wmove(inputBox,0,p);
@@ -138,4 +147,3 @@ int main() {
     endwin();
     return 0;
 }
-
