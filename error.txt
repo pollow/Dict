@@ -1,0 +1,29 @@
+Undefined symbols for architecture x86_64:
+  "_expNodeList", referenced from:
+      _wordSelect in layout.o
+      _parser in parser.o
+  "_trielist", referenced from:
+      _wordSelect in layout.o
+      _layoutProcess in layout.o
+      _travel in lookup.o
+      _lookupProcess in lookup.o
+      _trieGetList in trie.o
+  "_waitingWord", referenced from:
+      _layoutProcess in layout.o
+  "_words", referenced from:
+      _readWords in main.o
+      _travel in lookup.o
+      _lookupProcess in lookup.o
+      _trieInsert in trie.o
+      _trieInit in trie.o
+      _MED in med.o
+     (maybe you meant: _wordsListBorder, _wordsList )
+  "_wordsNode", referenced from:
+      _travel in lookup.o
+      _trieInit in trie.o
+  "_wordsNum", referenced from:
+      _layoutInit in layout.o
+      _lookupProcess in lookup.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+make: *** [dict] Error 1
