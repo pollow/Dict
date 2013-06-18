@@ -5,9 +5,7 @@
 #include "trie.h"
 #include "lookup.h"
 #include "med.h"
-
-extern char *words[MAXN];
-extern struct trieNode wordsNode[MAXN];
+#include "global.h"
 
 void readWords();
 int init();

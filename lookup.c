@@ -1,6 +1,6 @@
 #include "lookup.h"
 
-int valid(char *str) {
+int trieValid(char *str) {
     for(int i=0;i <= strlen(str); i++) {
         if(str[i] == '*' || str[i] == '?') {
             return -1;
@@ -9,8 +9,8 @@ int valid(char *str) {
     return 1;
 }
 
-bool check(char *a, char *b) {
-    j = 0;
+bool isCapable(char *a, char *b) {
+    int j = 0;
     for(int i=0;i<=strlen(a);i++) {
         if(a[i] =! '*' && a[i] != '?') {
             if(a[i]!=b[j]) return false;
@@ -19,7 +19,7 @@ bool check(char *a, char *b) {
             j++;
         } else if(a[i] == '?') {
             for(int k=j;k<=strlen(b);k++) {
-                if(check(a[i+1],b[k])) return true;
+                if(isCapable(a+(i+1),b+k)) return true;
             }
             return false;
         }
@@ -31,9 +31,9 @@ bool check(char *a, char *b) {
 void travel(char *str,int num) {
 // 处理一下连续问号的情况。
     for(int i=0;i<=MAXN;i++) {
-        if(check(str,words[i])) {
-            num--
-            struct *trieList tmp =(struct *trieList) malloc(sizeof(struct trieList));
+        if(isCapable(str,words[i])) {
+            num--;
+            struct trieList *tmp = (struct trieList *) malloc(sizeof(struct trieList));
             tmp->next = trielist;
             tmp->key = wordsNode[i];
             trielist = tmp;
@@ -47,23 +47,20 @@ int lookupProcess(char *str) {
 
     trielist = NULL;
 
-    if(valid(str)==-1) {
-        travel(str);
+    if(trieValid(str)==-1) {
+        travel(str,20);
     } else {
         hexConvert(hexStr,str);
-        struct trieNode *final = trieSearch(trieRoot,hexStr);
+        struct trieNode *final = trieSearch(&trieRoot,hexStr);
         if(final == NULL) {
-            int ap = med(str);
+            int ap = MED(str);
             trielist = (struct trieList *) malloc(sizeof(struct trieList));
-            *trielist->next = NULL;
+            trielist->next = NULL;
             hexConvert(hexStr,words[ap]);
-            *trielist->key = trieSearch(trieRoot,hexStr);
+            trielist->key = trieSearch(&trieRoot,hexStr);
         } else {
-            trieGetlist(trielist,wordNum);
-            return trielist;
+            trieGetList(final,&wordsNum);
         }
     }
     return 0;
 }
-
-

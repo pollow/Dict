@@ -5,13 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "global.h"
 
-extern struct expTreeNode {
-    char name[4];
-    char *data;
-};
-
-extern struct expTreeNode *expNodeList[2000];
-extern int expNodetop=0;
+int parser(char *str, int i);
+extern void parserProcess(int index);
 
 #endif

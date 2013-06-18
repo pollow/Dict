@@ -1,10 +1,15 @@
 #include <stdio.h>
+#include <ncurses.h>
 
 int main() {
-    FILE *f = fopen("0.txt","r");
-    char c;
-    while((c = fgetc(f)) != EOF) {
-        printf("%c",c);
-    }
+    initscr();
+    cbreak();
+    noecho();
+
+    mvprintw(10,10,"hello world!");
+
+    refresh();
+    getch();
+    endwin();
     return 0;
 }

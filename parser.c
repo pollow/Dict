@@ -1,14 +1,5 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include "parser.h"
 
-struct expTreeNode {
-    char name[4];
-    char *data;
-};
-
-struct expTreeNode *expNodeList[2000];
 int expNodetop=0;
 
 int parser(char *str, int i) {
@@ -54,19 +45,11 @@ int parser(char *str, int i) {
     return i;
 }
 
-void print() {
-    for(int i=0;i<expNodetop;i++) {
-        printf("%s \n",expNodeList[i]->name);
-        if(expNodeList[i]->data != NULL) printf("%s\n",expNodeList[i]->data);
-    }
- 
-}
-
-int main() {
-    int index = 2;
-    char path[25]="./abcde/",explain[100000];
+void parserProcess(int index) {
+    char path[25]="./words/",explain[100000];
     memset(explain,0,sizeof(explain));
     int i=8;
+    expNodetop=0;
     if(index!=0) {
         int len=log(index)/log(10)+0.0001;
         for(int j=i+len;j>=i;j--) {
@@ -80,5 +63,4 @@ int main() {
     i = 0;
     while((explain[i++]=fgetc(f)) != EOF) {;}
     parser(explain,0);
-    print();
 }

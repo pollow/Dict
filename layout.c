@@ -42,6 +42,7 @@ void layoutInit() {
     wattron(inputBox,COLOR_PAIR(2));        // inputBox窗体颜色
     wattron(wordDetail,COLOR_PAIR(2));      // wordDetail窗体颜色
 
+    wordsNum = 20;
 }
 
 void wordSelect() {
@@ -50,7 +51,7 @@ void wordSelect() {
     memset(indexs,0,sizeof(indexs));
     struct trieList *p = trielist;
     while(p) {
-        index[i] = p->key->index;
+        indexs[i] = (p->key)->index;
         p = p->next;
         i++;
     }
@@ -80,6 +81,12 @@ void wordSelect() {
         mvwchgat(wordsList,item,0,-1,A_NORMAL,1,NULL);
         wrefresh(wordsList);
         // 向detail打印解释。
+        parserProcess(indexs[item]);
+        for(int i=0;i<expNodetop;i++) {
+            wprintw(wordDetail,"%s \n",expNodeList[i]->name);
+            if(expNodeList[i]->data != NULL) printf("%s\n",expNodeList[i]->data);
+        }
+ 
     }
     curs_set(1);
 }
@@ -132,11 +139,11 @@ int layoutProcess() {
         //     mvwprintw(wordsList,i,0,waitingWord);
         // }
         lookupProcess(waitingWord);
-        i = 0;
-        struct trieList *p = trielist;
-        while(p) {
-            mvprintw(wordsList,p,0,trielist->key->word);
-            p = p->next;
+        int i = 0;
+        struct trieList *tl = trielist;
+        while(tl) {
+            mvwprintw(wordsList,i,0,(tl->key)->word);
+            tl = tl->next;
             i++;
         }
         wrefresh(wordsList);

@@ -67,11 +67,12 @@ void trieGetList(struct trieNode *u, int *num) {
 void trieInit() {
     int hexStr[100];
     char str[100];
+
     for(int i=0;i<=MAXN;i++) {
         if(words[i] == NULL) {
             continue;
         }
         hexConvert(hexStr,words[i]);
-        wordsNode[i] = trieInsert(&root,hexStr,words[i],i);
+        wordsNode[i] = trieInsert(&trieRoot,hexStr,words[i],i);
     }
 }

@@ -6,6 +6,9 @@
 #include <locale.h>
 #include <string.h>
 #include <ctype.h>
+#include "global.h"
+#include "lookup.h"
+#include "parser.h"
 
 int max_col, max_row;
 extern char waitingWord[1000];
@@ -15,6 +18,6 @@ WINDOW *inputBoxBorder, *wordsListBorder, *wordDetailBorder,*inputBox,*wordsList
 
 extern void layoutInit();
 extern void wordSelect();
-extern int process()
+extern int layoutProcess();
 
 #endif

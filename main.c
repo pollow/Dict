@@ -16,7 +16,7 @@ int init() {
     // 读入索引文件，建立<索引,单词>关系，words。
     readWords();
     // 建立trie树，建立<索引,trie节点>关系，wordsNode
-    tireInit();
+    trieInit();
     // 界面初始化。
     layoutInit();
 }

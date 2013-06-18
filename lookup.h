@@ -1,14 +1,17 @@
 #ifndef _LOOKUP
 #define _LOOKUP
 
-#include <stdlib>
-#include <stdio>
+#include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include "med.h"
 #include "trie.h"
+#include "global.h"
 
-extern int valid(char *);
-extern bool check(char *, char *);
-extern void travel(char *,int);
+bool isCapable(char *, char *);
+int trieValid(char *);
+void travel(char *, int);
+extern int lookupProcess(char *str);
 
 #endif

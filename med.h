@@ -1,12 +1,12 @@
-#ifndef MED
-#define MED
+#ifndef _MED
+#define _MED
 
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
+#include "global.h"
 
-#define MAXN 100000
 #define INS 1
 #define DEL 1
 #define SUB 1
