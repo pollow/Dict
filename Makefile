@@ -1,12 +1,12 @@
 objects = main.o layout.o lookup.o trie.o med.o parser.o global.o
 
 all: $(objects)
-	gcc -o dict $(objects) -lncurses -lpanel -lm -std=c99
+	gcc -o dict $(objects) -lncurses -lpanel -lm -std=c99 -Wall -g
 
 %.o : %.c
-	gcc -c $< -o $@ -std=c99
+	gcc -c $< -o $@ -std=c99 -g -Wall
 
-main.c: main.h layout.h trie.h lookup.h med.h global.h
+main.c: layout.h trie.h lookup.h med.h global.h
 
 lookup.c: lookup.h med.h trie.h global.h
 

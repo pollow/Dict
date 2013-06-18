@@ -10,6 +10,10 @@
 #include <panel.h>
 
 char waitingWord[1000];
+static int max_col, max_row;
+
+PANEL *homePanel, *viewPanel;
+WINDOW *inputBoxBorder, *wordsListBorder, *wordDetailBorder,*inputBox,*wordsList,*wordDetail;
 
 void layoutInit() {
     // 设置语言环境

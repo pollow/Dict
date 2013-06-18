@@ -1,4 +1,3 @@
-#include "main.h"
 #include "global.h"
 #include "layout.h"
 #include "trie.h"
