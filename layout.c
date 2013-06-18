@@ -1,4 +1,15 @@
 #include "layout.h"
+#include "global.h"
+#include "lookup.h"
+#include "parser.h"
+
+#include <locale.h>
+#include <string.h>
+#include <ctype.h>
+#include <ncurses.h>
+#include <panel.h>
+
+char waitingWord[1000];
 
 void layoutInit() {
     // 设置语言环境

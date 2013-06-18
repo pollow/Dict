@@ -1,4 +1,13 @@
 #include "main.h"
+#include "global.h"
+#include "layout.h"
+#include "trie.h"
+#include "lookup.h"
+#include "med.h"
+
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void readWords() {
     int index=0;
@@ -19,6 +28,7 @@ int init() {
     trieInit();
     // 界面初始化。
     layoutInit();
+    return 0;
 }
 
 int main() {

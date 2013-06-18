@@ -1,11 +1,5 @@
-#ifndef _MAIN
-#define _MAIN
-
-#include "layout.h"
-#include "trie.h"
-#include "lookup.h"
-#include "med.h"
-#include "global.h"
+#ifndef _MAIN_H
+#define _MAIN_H
 
 void readWords();
 int init();

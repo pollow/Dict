@@ -1,9 +1,6 @@
-#ifndef _TRIE
-#define _TRIE
+#ifndef _TRIE_H
+#define _TRIE_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #include "global.h"
 
 void trieNodeInit(struct trieNode *);

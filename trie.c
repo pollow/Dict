@@ -7,10 +7,14 @@
 
 #include "trie.h"
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 void trieNodeInit(struct trieNode *a) {
     a->index = -1;
     a->word = NULL;
-    memset(a->son,0,sizeof(a->son));
+    memset(a->son,0, sizeof(a->son));
 }
 
 struct trieNode *newNode() {
@@ -20,15 +24,15 @@ struct trieNode *newNode() {
 }
 
 void hexConvert(int *a, char *b) {
-    for(int i=0;i<strlen(b);i++) {
+    for (int i = 0; i < (int)strlen(b); i++) {
         a[i*2] = b[i]/16;
         a[i*2+1] = b[i]%16;
     }
-    a[strlen(b)*2]=-1;
+    a[strlen(b)*2] = -1;
 }
 
 struct trieNode *trieInsert(struct trieNode *u, int *q, const char *word, int index) {
-    while (*q!=-1) {
+    while (*q != -1) {
         if(u->son[*q] == NULL) u->son[*q] = newNode();
         u = u->son[*q];
         q++;
@@ -66,7 +70,6 @@ void trieGetList(struct trieNode *u, int *num) {
 
 void trieInit() {
     int hexStr[100];
-    char str[100];
 
     for(int i=0;i<=MAXN;i++) {
         if(words[i] == NULL) {

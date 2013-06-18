@@ -1,11 +1,5 @@
-#ifndef _MED
-#define _MED
-
-#include <stdlib.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <string.h>
-#include "global.h"
+#ifndef _MED_H
+#define _MED_H
 
 #define INS 1
 #define DEL 1

@@ -1,27 +1,24 @@
 objects = main.o layout.o lookup.o trie.o med.o parser.o global.o
-dict: $(objects)
-	gcc -o dict $(objects) -lncurses -lpanel -std=c99
 
-main.o: main.c main.h layout.o trie.o lookup.o med.o global.o
-	gcc -c main.c -std=c99
+all: $(objects)
+	gcc -o dict $(objects) -lncurses -lpanel -lm -std=c99
 
-lookup.o: lookup.c lookup.h med.o trie.o global.o
-	gcc -c lookup.c -std=c99
+%.o : %.c
+	gcc -c $< -o $@ -std=c99
 
-trie.o: trie.c trie.h global.o
-	gcc -c trie.c -std=c99
+main.c: main.h layout.h trie.h lookup.h med.h global.h
 
-parser.o: parser.c parser.h global.o
-	gcc -c parser.c -std=c99
+lookup.c: lookup.h med.h trie.h global.h
 
-layout.o: layout.c layout.h lookup.o global.o
-	gcc -c layout.c -std=c99
+trie.c: trie.h global.h
 
-med.o: med.c med.h global.o
-	gcc -c med.c -std=c99
+parser.c: parser.h global.h
 
-global.o: global.c global.h
-	gcc -c global.c -std=c99
+layout.c: layout.h lookup.h global.h parser.h
+
+med.c: med.h global.h
+
+global.c: global.h
 
 clean:
-	rm dict $(objects)
+	rm -rf dict $(objects)

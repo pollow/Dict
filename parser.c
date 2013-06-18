@@ -1,9 +1,15 @@
 #include "parser.h"
+#include "global.h"
+
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 int expNodetop=0;
 
 int parser(char *str, int i) {
-    while(i<strlen(str)) {
+    while (i < (int)strlen(str)) {
         // 转移符略过。
         if(str[i]=='\\') i+=2;
         // 获取标签开头。
@@ -57,7 +63,6 @@ void parserProcess(int index) {
             index/=10;
         }
     } else {path[i]='0';}
-    int tmp = strlen(path);
     strcpy(path+strlen(path),".txt");
     FILE *f = fopen(path,"r");
     i = 0;
