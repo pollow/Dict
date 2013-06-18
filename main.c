@@ -13,13 +13,12 @@ void readWords() {
     char str[100]="";
     FILE *f = fopen("index.txt", "r");
     while(fscanf(f,"%d ",&index) == 1) {
-        if(index==20311) {
-            printf("fuck!");
+        if(index==5660) {
+            printf("fucker!");
         }
-        int i = 0; while((str[i++]=fgetc(f)) != '\n') {}; str[i-1] = '\0';
+        int i = 0; while((str[i++]=fgetc(f)) != '\n') {}; str[i-1] = 0;
         words[index] = (char *) malloc(strlen(str)*sizeof(char));
         strcpy(words[index],str);
-        printf("%d %s\n",index,words[index]);
     }
     fclose(f);
 }

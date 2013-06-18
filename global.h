@@ -1,7 +1,7 @@
 #ifndef _GLOBAL_H
 #define _GLOBAL_H
 
-#define MAXN 100000
+#define MAXN 91286
 
 struct expTreeNode {
     char name[4];

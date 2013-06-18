@@ -31,7 +31,7 @@ void hexConvert(int *a, char *b) {
     a[strlen(b)*2] = -1;
 }
 
-struct trieNode *trieInsert(struct trieNode *u, int *q, int index) {
+struct trieNode *trieInsert(struct trieNode *u, int *q, const int index) {
     while (*q != -1) {
         if(u->son[*q] == NULL) u->son[*q] = newNode();
         u = u->son[*q];
@@ -69,8 +69,9 @@ void trieGetList(struct trieNode *u, int *num) {
 }
 
 void trieInit() {
-    int hexStr[100];
-
+    int hexStr[200];
+    int breaknum = 0;
+    scanf("%d",&breaknum);
     for(int i=0;i<MAXN;i++) {
         printf("%d ",i);
         if(words[i] == NULL) {
@@ -78,6 +79,9 @@ void trieInit() {
             continue;
         }
         printf("%s\n",words[i]);
+        if(i == breaknum) {
+            printf("fuck!");
+        }
         hexConvert(hexStr,words[i]);
         wordsNode[i] = trieInsert(&trieRoot,hexStr,i);
     }
