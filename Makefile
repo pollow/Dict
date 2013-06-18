@@ -17,6 +17,9 @@ parser.o: parser.c parser.h global.o
 layout.o: layout.c layout.h lookup.o global.o
 	gcc -c layout.c -std=c99
 
+med.o: med.c med.h global.o
+	gcc -c med.c -std=c99
+
 global.o: global.c global.h
 	gcc -c global.c -std=c99
 
