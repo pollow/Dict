@@ -71,16 +71,9 @@ void trieGetList(struct trieNode *u, int *num) {
 void trieInit() {
     int hexStr[200];
     int breaknum = 0;
-    scanf("%d",&breaknum);
     for(int i=0;i<MAXN;i++) {
-        printf("%d ",i);
         if(words[i] == NULL) {
-            printf("\n");
             continue;
-        }
-        printf("%s\n",words[i]);
-        if(i == breaknum) {
-            printf("fuck!");
         }
         hexConvert(hexStr,words[i]);
         wordsNode[i] = trieInsert(&trieRoot,hexStr,i);
