@@ -1,3 +1,9 @@
+/*
+ * layout.c
+ *
+ * Copyright 2013 Chang Xing
+ */
+
 #include "layout.h"
 #include "global.h"
 #include "lookup.h"

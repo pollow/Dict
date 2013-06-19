@@ -1,3 +1,9 @@
+/*
+ * med.h
+ *
+ * Copyright 2013 Hongpu Ma
+ */
+
 #ifndef _MED_H
 #define _MED_H
 

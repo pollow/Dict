@@ -1,3 +1,9 @@
+/*
+ * trie.h
+ *
+ * Copyright 2013 Hongpu Ma
+ */
+
 #ifndef _TRIE_H
 #define _TRIE_H
 

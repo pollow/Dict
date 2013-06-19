@@ -1,3 +1,9 @@
+/*
+ * main.c
+ *
+ * Copyright 2013 Chang Xing
+ */
+
 #include "global.h"
 #include "layout.h"
 #include "trie.h"

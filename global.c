@@ -1,3 +1,9 @@
+/*
+ * global.c
+ *
+ * Copyright 2013 Hongpu Ma
+ */
+
 #include "global.h"
 
 struct trieList *trielist;

@@ -1,3 +1,9 @@
+/*
+ * lookup.c
+ *
+ * Copyright 2013 Chang Xing
+ */
+
 #include "lookup.h"
 #include "med.h"
 #include "trie.h"

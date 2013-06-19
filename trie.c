@@ -1,9 +1,10 @@
-//  Created by 邢 畅 on 13-5-12.
-//  Copyright (c) 2013年 邢 畅. All rights reserved.
-//  Bugs:
-//		有一点奇怪的词汇会导致崩溃。共同特点是比较长，但并不是最长的那些。有些奇怪，删掉后正常运行。这些词可以用diff对比备份文件查看。
-//		在Linux下运行会崩溃。不知道为什么。Windows下运行不稳定。明明都是简单代码。
-//
+/*
+ * trie.c
+ *
+ * Word Tree
+ *
+ * Copyright 2013 Chang Xing
+ */
 
 #include "trie.h"
 
@@ -70,7 +71,6 @@ void trieGetList(struct trieNode *u, int *num) {
 
 void trieInit() {
     int hexStr[200];
-    int breaknum = 0;
     for(int i=0;i<MAXN;i++) {
         if(words[i] == NULL) {
             continue;

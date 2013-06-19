@@ -1,6 +1,10 @@
-//  Created by 邢 畅 on 13-5-12.
-//  Copyright (c) 2013年 邢 畅. All rights reserved.
-//
+/*
+ * med.c
+ *
+ * Minimum Edit Distance (DP)
+ *
+ * Copyright 2013 Chang Xing
+ */
 
 #include "med.h"
 #include "global.h"

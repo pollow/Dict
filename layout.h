@@ -1,3 +1,9 @@
+/*
+ * layout.h
+ *
+ * Copyright 2013 Hongpu Ma
+ */
+
 #ifndef _LAYOUT_H
 #define _LAYOUT_H
 

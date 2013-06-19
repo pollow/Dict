@@ -1,3 +1,9 @@
+/*
+ * lookup.h
+ *
+ * Copyright 2013 Hongpu Ma
+ */
+
 #ifndef _LOOKUP_H
 #define _LOOKUP_H
 

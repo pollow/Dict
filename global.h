@@ -1,3 +1,9 @@
+/*
+ * global.h
+ *
+ * Copyright 2013 Hongpu Ma
+ */
+
 #ifndef _GLOBAL_H
 #define _GLOBAL_H
 

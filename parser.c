@@ -1,3 +1,9 @@
+/*
+ * parser.c
+ *
+ * Copyright 2013 Chang Xing
+ */
+
 #include "parser.h"
 #include "global.h"
 
