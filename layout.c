@@ -63,7 +63,7 @@ void layoutInit() {
     wattron(inputBox,COLOR_PAIR(2));        // inputBox窗体颜色
     wattron(wordDetail,COLOR_PAIR(2));      // wordDetail窗体颜色
 
-    wordsNum = 20;
+    wordsNum = max_row-4;
 }
 
 void wordSelect() {
@@ -110,6 +110,16 @@ void wordSelect() {
  
     }
     curs_set(1);
+}
+
+void printWords(struct trieList *tl) {
+    if(tl==NULL) {
+        return;
+    } else {
+        printWords(tl->next);
+        mvwprintw(wordsList,printPos,0,"%d %s",printPos,(tl->key)->word);
+        printPos++;
+    }
 }
 
 int layoutProcess() {
@@ -160,13 +170,11 @@ int layoutProcess() {
         //     mvwprintw(wordsList,i,0,waitingWord);
         // }
         lookupProcess(waitingWord);
-        int i = 0;
-        struct trieList *tl = trielist;
-        while(tl) {
-            mvwprintw(wordsList,i,0,(tl->key)->word);
-            tl = tl->next;
-            i++;
-        }
+        werase(wordsList);
+
+        printPos = 0;
+        printWords(trielist);
+
         wrefresh(wordsList);
         wmove(inputBox,0,p);
         wrefresh(inputBox);

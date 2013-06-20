@@ -10,6 +10,8 @@
 #include <ncurses.h>
 #include <panel.h>
 
+int printPos;
+
 extern char waitingWord[1000];
 
 extern void layoutInit();
