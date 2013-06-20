@@ -61,16 +61,28 @@ int lookupProcess(char *str) {
     trielist = NULL;
 
     if (trieValid(str) == -1) {
-        travel(str,20);
+        travel(str,wordsNum);
     } else {
         hexConvert(hexStr, str);
         struct trieNode *final = trieSearch(&trieRoot, hexStr);
         if(final == NULL) {
-            int ap = MED(str);
-            trielist = (struct trieList *) malloc(sizeof(struct trieList));
-            trielist->next = NULL;
-            hexConvert(hexStr, words[ap]);
-            trielist->key = trieSearch(&trieRoot, hexStr);
+            MED(str);
+            trielist = NULL;
+            while(heapSize-1) {
+                struct trieList *tmp = (struct trieList *) malloc(sizeof(struct trieList));
+                tmp->key = wordsNode[popHeap()];
+                tmp->next = trielist;
+                trielist = tmp;
+                // ap->key = wordsNode[popHeap()];
+                // if(heapSize) {
+                //     ap->next = (struct trieList *) malloc(sizeof(struct trieList));
+                //     ap = ap->next;
+                // } else ap->next = NULL;
+            }
+            // trielist->next = NULL;
+            // trielist->key = wordsNode[ap];
+            // hexConvert(hexStr, words[ap]);
+            // trielist->key = trieSearch(&trieRoot, hexStr);
         } else {
             trieGetList(final, &wordsNum);
         }

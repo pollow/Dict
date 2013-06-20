@@ -12,6 +12,7 @@
 #define SUB 1
 
 extern int min(int, int);
-extern int MED(char *);
+extern void MED(char *);
+extern int popHeap();
 
 #endif

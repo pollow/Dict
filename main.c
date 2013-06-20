@@ -3,6 +3,7 @@
  *
  * Copyright 2013 Chang Xing
  */
+#define __DEBUG 1
 
 #include "global.h"
 #include "layout.h"
@@ -36,11 +37,28 @@ int init() {
     return 0;
 }
 
+void test() {
+    readWords();
+    trieInit();
+    wordsNum = 20;
+    lookupProcess("goddy");
+    while(trielist) {
+        printf("%s\n",(trielist->key)->word);
+        trielist = trielist->next;
+    }
+}
+
 int main() {
+    if(__DEBUG) {
+        test();
+    } else {
+
     // 初始化。
     init();
     // 调用主程序。
     layoutProcess();
+   
+    }
     
     return 0;
 }
