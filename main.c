@@ -9,6 +9,7 @@
 #include "layout.h"
 #include "trie.h"
 #include "lookup.h"
+#include "parser.h"
 #include "med.h"
 
 #include <string.h>
@@ -43,12 +44,12 @@ void test() {
     wordsNum = 20;
     lookupProcess("abc");
     while(trielist) {
-        printf("%s\n",(trielist->key)->word);
-        trielist = trielist->next;
-    }
-    lookupProcess("abcd");
-    while(trielist) {
-        printf("%s\n",(trielist->key)->word);
+        int _index_ = trielist->key->index;
+        printf("%s %d\n",(trielist->key)->word,_index_);
+        parserProcess(_index_);
+        for(int i=0; i<expNodetop;i++) {
+            printf("%s %s\n",expNodeList[i]->name,expNodeList[i]->data);
+        }
         trielist = trielist->next;
     }
 }

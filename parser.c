@@ -15,8 +15,8 @@
 int expNodetop=0;
 
 int parser(char *str, int i) {
-    while (i < (int)strlen(str)) {
-        // 转移符略过。
+    while (i < (int) strlen(str)) {
+        // 转意符略过。
         if(str[i]=='\\') i+=2;
         // 获取标签开头。
         else if(str[i]=='<') {
@@ -25,28 +25,26 @@ int parser(char *str, int i) {
             if(str[i]=='/') {
                 struct expTreeNode *node = (struct expTreeNode *) malloc(sizeof(struct expTreeNode));
                 node->data = NULL;
-                node->name[0] = '\\';node->name[1] = str[i+1];node->name[2] = str[i+2];node->name[3] = '\0';
+                node->name[0] = '/';node->name[1] = str[i+1];node->name[2] = str[i+2];node->name[3] = '\0';
                 expNodeList[expNodetop++] = node;
-                return i+4;
+                return i+3;
             // 是头标签。
             } else {
-                // 判断是否为内容标签。
                 struct expTreeNode *node = (struct expTreeNode *) malloc(sizeof(struct expTreeNode));
                 node->name[0] = str[i];node->name[1] = str[i+1];node->name[2] = '\0';
                 node->data = NULL;
                 expNodeList[expNodetop++] = node;
                 i+=3;
-                if(str[i]=='<') {
+                // 判断是否为内容标签。
+                if(str[i]=='<' && str[i+1]=='!') {
                     i++;
-                    if(str[i]=='!') {
-                        i+=8;
-                        char *tmpHead = str+i,*tmpTail = str+i;
-                        while(*tmpTail != '>') tmpTail++;
-                        int len = tmpTail - tmpHead - 2;
-                        node->data = (char *) malloc(sizeof(char)*len);
-                        strncpy(node->data,tmpHead,len);
-                        i+=len+8;
-                    }
+                    i+=8;
+                    char *tmpHead = str+i,*tmpTail = str+i;
+                    while(*tmpTail != '>') tmpTail++;
+                    int len = tmpTail - tmpHead - 2;
+                    node->data = (char *) malloc(sizeof(char)*len);
+                    strncpy(node->data,tmpHead,len);
+                    i+=len+7;
                 } else {
                     i = parser(str,i);
                 }

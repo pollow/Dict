@@ -71,17 +71,30 @@ void wordSelect() {
     int indexs[20];
     memset(indexs,0,sizeof(indexs));
     struct trieList *p = trielist;
+    // 建立索引数组
     while(p) {
         indexs[i] = (p->key)->index;
         p = p->next;
         i++;
     }
+    // 隐藏光标
     curs_set(0);
     mvwchgat(wordsList,0,0,-1,A_NORMAL,1,NULL);
+    // 打印第一个释义
+    parserProcess(indexs[item]);
+    for(int i=0;i<expNodetop;i++) {
+        wprintw(wordDetail,"%s\n",expNodeList[i]->name);
+        if(expNodeList[i]->data != NULL) wprintw(wordDetail,"%s\n",expNodeList[i]->data);
+    }
     wrefresh(wordsList);
+    wrefresh(wordDetail);
+
     while(1) {
         int ch = getch();
         switch(ch) {
+            case KEY_F(1) : 
+                endwin();
+                return 0;
             case KEY_UP :
                 mvwchgat(wordsList,item,0,-1,A_NORMAL,2,NULL);
                 if(item>0) item--;
@@ -103,11 +116,12 @@ void wordSelect() {
         wrefresh(wordsList);
         // 向detail打印解释。
         parserProcess(indexs[item]);
+        werase(wordDetail);
         for(int i=0;i<expNodetop;i++) {
             wprintw(wordDetail,"%s \n",expNodeList[i]->name);
-            if(expNodeList[i]->data != NULL) printf("%s\n",expNodeList[i]->data);
+            if(expNodeList[i]->data != NULL) wprintw(wordDetail,"%s\n",expNodeList[i]->data);
         }
- 
+        wrefresh(wordDetail);
     }
     curs_set(1);
 }
