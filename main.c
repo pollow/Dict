@@ -3,7 +3,7 @@
  *
  * Copyright 2013 Chang Xing
  */
-#define __DEBUG 1
+#define __DEBUG 0
 
 #include "global.h"
 #include "layout.h"
@@ -41,7 +41,12 @@ void test() {
     readWords();
     trieInit();
     wordsNum = 20;
-    lookupProcess("goddy");
+    lookupProcess("abc");
+    while(trielist) {
+        printf("%s\n",(trielist->key)->word);
+        trielist = trielist->next;
+    }
+    lookupProcess("abcd");
     while(trielist) {
         printf("%s\n",(trielist->key)->word);
         trielist = trielist->next;

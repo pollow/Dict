@@ -55,6 +55,20 @@ struct trieNode *trieSearch(struct trieNode *u, int *ch) {
     }
 }
 
+void delTrieList(struct trieList *u) {
+    if(u == NULL) {
+        return;
+    } else {
+        delTrieList(u->next);
+        free(u);
+    }
+}
+
+void emptyTrieList() {
+    delTrieList(trielist);
+    trielist = NULL;
+}
+
 void trieGetList(struct trieNode *u, int *num) {
     if(u->index != -1) {
         struct trieList *tmp = (struct trieList *) malloc(sizeof(struct trieList));    

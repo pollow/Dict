@@ -67,7 +67,7 @@ int lookupProcess(char *str) {
         struct trieNode *final = trieSearch(&trieRoot, hexStr);
         if(final == NULL) {
             MED(str);
-            trielist = NULL;
+            emptyTrieList();
             while(heapSize-1) {
                 struct trieList *tmp = (struct trieList *) malloc(sizeof(struct trieList));
                 tmp->key = wordsNode[popHeap()];
@@ -84,7 +84,8 @@ int lookupProcess(char *str) {
             // hexConvert(hexStr, words[ap]);
             // trielist->key = trieSearch(&trieRoot, hexStr);
         } else {
-            trieGetList(final, &wordsNum);
+            int tmp = wordsNum;
+            trieGetList(final, &tmp);
         }
     }
     return 0;

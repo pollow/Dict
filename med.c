@@ -20,9 +20,7 @@ int min(int a, int b) {
 }
 
 void cleanHeap() {
-    for(int  i = 0; i <= HEAP_SIZE; i++) {
-        free(heap[i]);
-    }
+    memset(heap,0,sizeof(heap));
     heapSize = 1;
 }
 
