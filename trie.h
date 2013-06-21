@@ -11,6 +11,7 @@
 
 extern void trieGetList(struct trieNode *, int *);
 extern void trieInit();
+extern void emptyTrieList();
 extern void hexConvert(int *, char *);
 extern struct trieNode *trieInsert(struct trieNode *, int *, int);
 extern struct trieNode *trieSearch(struct trieNode *, int *);

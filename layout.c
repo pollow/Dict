@@ -94,7 +94,7 @@ void wordSelect() {
         switch(ch) {
             case KEY_F(1) : 
                 endwin();
-                return 0;
+                return;
             case KEY_UP :
                 mvwchgat(wordsList,item,0,-1,A_NORMAL,2,NULL);
                 if(item>0) item--;
