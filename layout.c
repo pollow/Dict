@@ -1,7 +1,7 @@
 /*
  * layout.c
  *
- * Copyright 2013 Chang Xing
+ * Copyright 2013 Chang Xing & Hongpu Ma
  */
 
 #include "layout.h"
@@ -12,6 +12,7 @@
 #include <locale.h>
 #include <string.h>
 #include <ctype.h>
+#include <curses.h>
 #include <ncurses.h>
 #include <panel.h>
 
@@ -66,6 +67,45 @@ void layoutInit() {
     wordsNum = max_row-4;
 }
 
+void printDetail() {
+    for(int i=0; i<expNodetop; i++) {
+        if (strcmp(expNodeList[i]->name, "DC") == 0) {
+            //词头
+        } else if (strcmp(expNodeList[i]->name, "YX") == 0) {
+            //子词条开始
+            wattrset(wordDetail, A_STANDOUT);
+            wprintw(wordDetail, "\n%s\n\n", expNodeList[i]->data);
+            wattrset(wordDetail, A_NORMAL);
+        } else if (strcmp(expNodeList[i]->name, "DX") == 0) {
+            wattrset(wordDetail, A_BOLD);
+            wprintw(wordDetail, "词性: ");
+            wattrset(wordDetail, A_NORMAL);
+            wprintw(wordDetail, "%s\n", expNodeList[i]->data);
+        } else if (strcmp(expNodeList[i]->name, "JX") == 0) {
+            /*wattrset(wordDetail, A_BOLD);
+            wprintw(wordDetail, "Explanation: ");
+            wattrset(wordDetail, A_NORMAL);
+            wprintw(wordDetail, "%s\n", expNodeList[i]->data);*/
+        } else if (strcmp(expNodeList[i]->name, "GZ") == 0) {
+            wattrset(wordDetail, A_BOLD);
+            wprintw(wordDetail, "释义: ");
+            wattrset(wordDetail, A_NORMAL);
+            wprintw(wordDetail, "%s\n", expNodeList[i]->data);
+        } else if (strcmp(expNodeList[i]->name, "LY") == 0) {
+            wattrset(wordDetail, A_BOLD);
+            wprintw(wordDetail, "例句: ");
+            wattrset(wordDetail, A_NORMAL);
+            wprintw(wordDetail, "%s\n", expNodeList[i]->data);
+        } else if (strcmp(expNodeList[i]->name, "LS") == 0) {
+            wattrset(wordDetail, A_BOLD);
+            wprintw(wordDetail, "翻译: ");
+            wattrset(wordDetail, A_NORMAL);
+            wprintw(wordDetail, "%s\n", expNodeList[i]->data);
+        }
+    }
+    wrefresh(wordDetail);
+}
+
 void wordSelect() {
     int item = 0,i=0;;
     int indexs[20];
@@ -82,12 +122,8 @@ void wordSelect() {
     mvwchgat(wordsList,0,0,-1,A_NORMAL,1,NULL);
     // 打印第一个释义
     parserProcess(indexs[item]);
-    for(int i=0;i<expNodetop;i++) {
-        wprintw(wordDetail,"%s\n",expNodeList[i]->name);
-        if(expNodeList[i]->data != NULL) wprintw(wordDetail,"%s\n",expNodeList[i]->data);
-    }
+    printDetail();
     wrefresh(wordsList);
-    wrefresh(wordDetail);
 
     while(1) {
         int ch = getch();
@@ -117,11 +153,7 @@ void wordSelect() {
         // 向detail打印解释。
         parserProcess(indexs[item]);
         werase(wordDetail);
-        for(int i=0;i<expNodetop;i++) {
-            wprintw(wordDetail,"%s \n",expNodeList[i]->name);
-            if(expNodeList[i]->data != NULL) wprintw(wordDetail,"%s\n",expNodeList[i]->data);
-        }
-        wrefresh(wordDetail);
+        printDetail();
     }
     curs_set(1);
 }
