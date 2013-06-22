@@ -11,7 +11,7 @@ Hongpu Ma
 
 Hong Cao
 
-TODO List
+###TODO List
 
 1. Words Detail Print to 'wordsDetail' WINDOW.
 2. ENTER to open a new WINDOW to view word's explaination.
