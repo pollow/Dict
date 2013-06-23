@@ -108,7 +108,7 @@ void printDetail() {
 
 void wordSelect() {
     int item = 0,i=0;;
-    int indexs[20];
+    int indexs[200];
     memset(indexs,0,sizeof(indexs));
     struct trieList *p = trielist;
     // 建立索引数组
@@ -116,6 +116,12 @@ void wordSelect() {
         indexs[i] = (p->key)->index;
         p = p->next;
         i++;
+    }
+    i--;
+    for(int j = 0; j < i/2 ; j++) {
+        int tmp = indexs[j];
+        indexs[j] = indexs[i-j];
+        indexs[i-j] = tmp;
     }
     // 隐藏光标
     curs_set(0);
@@ -141,7 +147,7 @@ void wordSelect() {
                 break;
             case KEY_DOWN :
                 mvwchgat(wordsList,item,0,-1,A_NORMAL,2,NULL);
-                if(item<20) item++;
+                if(item<wordsNum-1) item++;
                 else {
                     curs_set(1);
                     return;
