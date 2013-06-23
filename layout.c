@@ -49,7 +49,7 @@ void layoutInit() {
     wordDetailBorder = newwin(max_row-3,max_col-20,3,20);
     wborder(wordDetailBorder,ACS_VLINE,ACS_VLINE,' ',ACS_HLINE,ACS_VLINE,ACS_VLINE,ACS_BTEE,ACS_LRCORNER);
     wrefresh(wordDetailBorder);
-    wordDetail = newwin(max_row-5,max_col-22,4,21);
+    wordDetail = newwin(max_row-5,max_col-22,3,21);
     wrefresh(wordDetail);
     // init finish
     refresh();
@@ -107,7 +107,7 @@ void printDetail() {
 }
 
 void wordSelect() {
-    int item = 0,i=0;;
+    int item = 0,i = 0, listlen;
     int indexs[200];
     memset(indexs,0,sizeof(indexs));
     struct trieList *p = trielist;
@@ -117,7 +117,7 @@ void wordSelect() {
         p = p->next;
         i++;
     }
-    i--;
+    listlen = --i;
     for(int j = 0; j < i/2 ; j++) {
         int tmp = indexs[j];
         indexs[j] = indexs[i-j];
@@ -147,7 +147,7 @@ void wordSelect() {
                 break;
             case KEY_DOWN :
                 mvwchgat(wordsList,item,0,-1,A_NORMAL,2,NULL);
-                if(item<wordsNum-1) item++;
+                if(item<listlen) item++;
                 else {
                     curs_set(1);
                     return;
