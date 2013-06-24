@@ -7,8 +7,8 @@
 #ifndef _MED_H
 #define _MED_H
 
-#define INS 1
-#define DEL 1
+#define INS 3
+#define DEL 5
 #define SUB 1
 
 extern int min(int, int);

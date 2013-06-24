@@ -29,9 +29,9 @@ bool isCapable(char *a, char *b) {
         if(a[i] != '*' && a[i] != '?') {
             if(a[i] != b[j]) return false;
             j++;
-        } else if(a[i] == '*') {
-            j++;
         } else if(a[i] == '?') {
+            j++;
+        } else if(a[i] == '*') {
             for (int k = j; k <= (int)strlen(b); k++) {
                 if (isCapable(a+(i+1),b+k)) return true;
             }

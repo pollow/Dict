@@ -11,6 +11,7 @@
 
 #include <locale.h>
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include <curses.h>
 #include <ncurses.h>
