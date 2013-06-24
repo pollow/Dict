@@ -49,8 +49,11 @@ void layoutInit() {
     wordDetailBorder = newwin(max_row-3,max_col-20,3,20);
     wborder(wordDetailBorder,ACS_VLINE,ACS_VLINE,' ',ACS_HLINE,ACS_VLINE,ACS_VLINE,ACS_BTEE,ACS_LRCORNER);
     wrefresh(wordDetailBorder);
-    wordDetail = newwin(max_row-5,max_col-22,3,21);
-    wrefresh(wordDetail);
+    // wordDetail = newwin(max_row-5,max_col-22,3,21);
+    wordDetail = newpad(2000,max_col-22);
+    // scrollok(wordDetail,TRUE);
+    // wsetscrreg(wordDetail,0,max_row-6);
+    // wrefresh(wordDetail);
     // init finish
     refresh();
     wmove(inputBox,0,0); // 设置初始光标位置
@@ -107,7 +110,7 @@ void printDetail() {
 }
 
 void wordSelect() {
-    int item = 0,i = 0, listlen;
+    int item = 0,i = 0, listlen, py = 0;
     int indexs[200];
     memset(indexs,0,sizeof(indexs));
     struct trieList *p = trielist;
@@ -129,10 +132,12 @@ void wordSelect() {
     // 打印第一个释义
     parserProcess(indexs[item]);
     printDetail();
+    prefresh(wordDetail,0,0,3,21,max_row-2,max_col-1);
     wrefresh(wordsList);
 
     while(1) {
         int ch = getch();
+        bool flag = false;
         switch(ch) {
             case KEY_F(1) : 
                 endwin();
@@ -144,6 +149,7 @@ void wordSelect() {
                     curs_set(1);
                     return;
                 }
+                py = 0;
                 break;
             case KEY_DOWN :
                 mvwchgat(wordsList,item,0,-1,A_NORMAL,2,NULL);
@@ -152,7 +158,20 @@ void wordSelect() {
                     curs_set(1);
                     return;
                 }
+                py = 0;
                 break;
+            case KEY_LEFT :
+                py--;
+                flag = true;
+                break;
+            case KEY_RIGHT :
+                py++;
+                flag = true;
+                break;
+        }
+        if(flag) {
+            prefresh(wordDetail,py,0,3,21,max_row-2,max_col-1);
+            continue;
         }
         mvwchgat(wordsList,item,0,-1,A_NORMAL,1,NULL);
         wrefresh(wordsList);
@@ -160,6 +179,7 @@ void wordSelect() {
         parserProcess(indexs[item]);
         werase(wordDetail);
         printDetail();
+        prefresh(wordDetail,py,0,3,21,max_row-2,max_col-1);
     }
     curs_set(1);
 }
