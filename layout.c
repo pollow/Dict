@@ -141,7 +141,7 @@ void wordSelect() {
         switch(ch) {
             case KEY_F(1) : 
                 endwin();
-                return;
+                exit(0);
             case KEY_UP :
                 mvwchgat(wordsList,item,0,-1,A_NORMAL,2,NULL);
                 if(item>0) item--;
@@ -153,7 +153,7 @@ void wordSelect() {
                 break;
             case KEY_DOWN :
                 mvwchgat(wordsList,item,0,-1,A_NORMAL,2,NULL);
-                if(item<listlen) item++;
+                if(item < listlen) item++;
                 else {
                     curs_set(1);
                     return;
