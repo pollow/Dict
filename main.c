@@ -42,14 +42,14 @@ void test() {
     readWords();
     trieInit();
     wordsNum = 20;
-    lookupProcess("abc");
+    lookupProcess("ap*l?");
     while(trielist) {
         int _index_ = trielist->key->index;
         printf("%s %d\n",(trielist->key)->word,_index_);
-        parserProcess(_index_);
-        for(int i=0; i<expNodetop;i++) {
-            printf("%s %s\n",expNodeList[i]->name,expNodeList[i]->data);
-        }
+        // parserProcess(_index_);
+        // for(int i=0; i<expNodetop;i++) {
+        //     printf("%s %s\n",expNodeList[i]->name,expNodeList[i]->data);
+        // }
         trielist = trielist->next;
     }
 }

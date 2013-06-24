@@ -23,6 +23,7 @@ int trieValid(char *str) {
 }
 
 bool isCapable(char *a, char *b) {
+    if(!b) return false;
     int j = 0;
     for (int i = 0; i <= (int)strlen(a); i++) {
         if(a[i] != '*' && a[i] != '?') {
