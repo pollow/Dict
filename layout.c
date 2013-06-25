@@ -132,6 +132,7 @@ void wordSelect() {
     mvwchgat(wordsList,0,0,-1,A_NORMAL,1,NULL);
     // 打印第一个释义
     parserProcess(indexs[item]);
+    werase(wordDetail);
     printDetail();
     prefresh(wordDetail,0,0,3,21,max_row-2,max_col-1);
     wrefresh(wordsList);
